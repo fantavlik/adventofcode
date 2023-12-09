@@ -66,7 +66,7 @@ bool get_result(std::string& set, std::array<int, 3>& result) {
 int main()
 {
     std::ifstream file("input.txt");
-    uint sum_valid_games = 0;
+    u_long sum_valid_games = 0;
     if (file.is_open()) {
         std::string line;
         while (std::getline(file, line)) {
@@ -89,6 +89,7 @@ int main()
             line = line.substr(game_str.size(), line.size() - 1);
             // Process each set
             // [# color], [# color],.. ;
+            std::array<uint, 3> min_cubes = {0, 0, 0};
             bool results_valid = true;
             std::vector<std::array<int, 3>> results; // [[#blue, #green, #red], ...]
             while (results_valid && regex_search(line, matches, set_rex)) {
@@ -107,15 +108,19 @@ int main()
                     results_valid = false;
                     break;
                 }
-                results_valid = (
-                    (result[0] <= MAX_BLUE) &&
-                    (result[1] <= MAX_GREEN) &&
-                    (result[2] <= MAX_RED)
-                );
+                // Used for part 1:
+                // results_valid = (
+                //     (result[0] <= MAX_BLUE) &&
+                //     (result[1] <= MAX_GREEN) &&
+                //     (result[2] <= MAX_RED)
+                // );
+                if (result[0] > min_cubes[0]) min_cubes[0] = result[0];
+                if (result[1] > min_cubes[1]) min_cubes[1] = result[1];
+                if (result[2] > min_cubes[2]) min_cubes[2] = result[2];
                 line = matches.suffix().str(); // move to next set
             }
             if (results_valid) {
-                sum_valid_games += game;
+                sum_valid_games += min_cubes[0] * min_cubes[1] * min_cubes[2];
             }
         }
         std::cout << "Valid game total: " << sum_valid_games;
