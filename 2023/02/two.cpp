@@ -1,8 +1,6 @@
 #include <iostream>
 #include <fstream>
-#include <map>
 #include <regex>
-#include <sstream>
 
 // Regex for matching example line of input:
 // Game 4: 14 blue, 8 red, 10 green; 7 green, 9 blue, 4 red; 4 green, 5 red"
