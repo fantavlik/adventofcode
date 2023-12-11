@@ -58,6 +58,7 @@
         "vector": "cpp",
         "algorithm": "cpp",
         "deque": "cpp",
-        "regex": "cpp"
+        "regex": "cpp",
+        "set": "cpp"
     }
 }
