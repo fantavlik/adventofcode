@@ -2,11 +2,11 @@
 #include <fstream>
 
 // Range (inclusive): [v1_start, v2_start, v2_offset]
-typedef std::array<long, 3> range_t;
-typedef std::vector<range_t> rangemap_t;
+typedef std::array<long, 3> conv_range_t;
+typedef std::vector<conv_range_t> rangemap_t;
 
 // Sort ranges by start value
-bool sort_ranges(range_t r1, range_t r2) {
+bool sort_ranges(conv_range_t r1, conv_range_t r2) {
     return r1[0] < r2[0];
 }
 
@@ -66,7 +66,7 @@ int main()
                 continue;
             }
             // Convert format from v2_start v1_start range -> v1_start v1_end offset
-            curr_map.push_back(range_t{nums[1], nums[1] + nums[2] - 1, nums[0] - nums[1]});
+            curr_map.push_back(conv_range_t{nums[1], nums[1] + nums[2] - 1, nums[0] - nums[1]});
         }
         // finish last map - sort by v1 start ranges
         sort(curr_map.begin(), curr_map.end(), sort_ranges);
@@ -79,7 +79,7 @@ int main()
                 std::cout << "\nNext map...\n";
                 // Get the next value if it's conained in one of our ranges
                 for (size_t r = 0; r < maps[m].size(); r++) {
-                    range_t range = maps[m][r];
+                    conv_range_t range = maps[m][r];
                     // If input val < range start then we're done traversing
                     if (val < range[0]) {
                         break; // the default case is to use current val for next val
