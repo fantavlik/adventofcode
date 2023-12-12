@@ -9,16 +9,6 @@ typedef std::vector<conv_range_t> rangemap_t;
 typedef std::array<long, 2> range_t;
 typedef std::vector<range_t> ranges_t;
 
-const range_t NULL_R = {0, 0};
-
-struct range_result {
-    bool in_range;
-    size_t range_index;
-    range_result():
-        in_range(false),
-        range_index(ULONG_MAX){}
-};
-
 // Sort ranges by start value
 bool sort_ranges(conv_range_t r1, conv_range_t r2) {
     return r1[0] < r2[0];
